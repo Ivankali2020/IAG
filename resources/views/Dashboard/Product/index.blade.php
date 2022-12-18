@@ -75,8 +75,10 @@
                                                 </form>
                                             @endif
                                         </td>
-                                        <td >
-                                            <span id="isPublish{{ $product->id }}" type="button" onclick="publish({{ $product->id }})" class="{{ $product->is_publish == '0' ? 'btn badge badge-soft-danger' : 'btn badge badge-soft-success' }}">{{ $product->is_publish == '0' ? "NO" : "YES"}}</span>
+                                        <td>
+                                            <form action="{{ route('publish',$product->id) }}" method="get">
+                                                <button class="{{ $product->is_publish == '0' ? 'btn badge badge-soft-danger' : 'btn badge badge-soft-success' }}">{{ $product->is_publish == '0' ? "NO" : "YES"}}</button>
+                                            </form>
                                         </td>
                                         <td>{{ $product->created_at->format('d M Y') }}</td>
                                     </tr>

@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="https://cdn3d.iconscout.com/3d/free/thumb/google-5148287-4299203.png">
 
     <!-- jsvectormap css -->
-    <link href="{{ asset('assets/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet" type="text/css" />
+{{--    <link href="{{ asset('assets/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet" type="text/css" />--}}
 
     <!--Swiper slider css-->
     <link href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />

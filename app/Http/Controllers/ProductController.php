@@ -209,10 +209,10 @@ class ProductController extends Controller
 
         $photo = ProductPhoto::where('id',$id)->first();
 
-        Storage::delete('/public/product_photo/'.$photo->name);
         $photo->delete();
 
-        return response()->json(['data' => true]);
+        return redirect()->back()->with('message',['icon' => 'success', 'text' => "Successfully Delete!"]);
+
     }
 
     public function publish($id)
@@ -222,8 +222,8 @@ class ProductController extends Controller
         $product->is_publish = $product->is_publish == '1' ? '0' : '1';
         $product->update();
 
-//        return redirect()->route('home')->with('message',['icon' => 'success', 'text' => "Successfully Publish!"]);
-        return response()->json(['data'=>true,'status' => $product->is_publish]);
+        return redirect()->route('home')->with('message',['icon' => 'success', 'text' => "Successfully Publish!"]);
+//        return response()->json(['data'=>true,'status' => $product->is_publish]);
     }
 
 }

@@ -33,9 +33,9 @@ Route::middleware('auth')->group(function (){
     Route::get('/home', [App\Http\Controllers\ProductController::class, 'index'])->name('home');
 
 
-    Route::get('/product/specification/{id}',[\App\Http\Controllers\ProductSpecificationController::class,'delete']);
-    Route::get('/product/photo/delete/{id}',[\App\Http\Controllers\ProductController::class,'deletePhoto']);
-    Route::get('/product/publish/{id}',[\App\Http\Controllers\ProductController::class,'publish']);
+    Route::get('/product/specification/{id}',[\App\Http\Controllers\ProductSpecificationController::class,'delete'])->name('product.specification');
+//    Route::get('/product/photo/delete/{id}',[\App\Http\Controllers\ProductController::class,'deletePhoto']);
+    Route::get('/product/publish/{id}',[\App\Http\Controllers\ProductController::class,'publish'])->name('publish');
 });
 
 

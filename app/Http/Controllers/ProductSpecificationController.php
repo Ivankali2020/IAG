@@ -10,6 +10,7 @@ class ProductSpecificationController extends Controller
     public function delete($id){
         $product = ProductSpecification::where('id',$id)->first();
         $product->delete();
-        return response()->json(['data'=>true]);
+        return redirect()->back()->with('message',['icon' => 'success', 'text' => ' successfully deleted!']);
+
     }
 }

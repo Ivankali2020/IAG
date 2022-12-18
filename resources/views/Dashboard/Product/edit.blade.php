@@ -104,7 +104,7 @@
                                         <label for="basiInput" class="form-label">Add-on</label>
                                         <select name="add_on" id="select_box" class="form-select">
                                             <option selected disabled>Select Add-on </option>
-                                            @forelse(\App\Models\Category::all() as $c)
+                                            @forelse(\App\Models\SubCategory::all() as $c)
                                                 <option value="{{ $c->id }}" {{ old('add_on',$product->add_on) == $c->id ? 'selected' : '' }} > {{ $c->name }}</option>
                                             @empty
                                                 <option value="">NO DATA FOUND</option>
@@ -146,11 +146,13 @@
                                 <div class="row">
                                     <h4 class="my-3 ">Product Specification</h4>
                                     @forelse($product->specs as $spec)
-                                        <div id="addBox{{ $spec->id }}">
+                                        <div >
                                             <div class="mb-3 col-12 " >
                                                 <div class=" d-flex justify-content-between align-items-center">
                                                     <label for="basiInput" class="form-label">Title</label>
-                                                    <button class="btn btn-danger btn-sm mb-2 " type="button" onclick="deleteBox({{ $spec->id }})"><i class="bx bx-trash"></i></button>
+                                                    <form action="{{ route('product.specification',$spec->id) }}" id="removeSpec{{ $spec->id }}" method="get">
+                                                        <button class="btn btn-danger btn-sm mb-2 " type="button" onclick="deleteBox({{ $spec->id }})"><i class="bx bx-trash"></i></button>
+                                                    </form>
 
                                                 </div>
                                                 <input type="text" class="form-control" name="stitle[]" value="{{ old('stitle[0]',$spec->title) }}">
@@ -247,11 +249,13 @@
 
                                 <div class="box row">
                                         @forelse($product->photos as $photo)
-                                        <div class="col-3 col-md-2" id="photo{{ $photo->id }}">
-                                        <div class="card" >
-                                                <button type="button" onclick="deletePhoto({{ $photo->id }})" class="w-100 btn btn-outline-danger btn-sm my-2 me-2 ">
-                                                    <i class="bx bx-trash"></i>
-                                                </button>
+                                        <div class="col-3 col-md-2" >
+                                            <div class="card" >
+                                                <form action="{{ route('product_photo.delete',$photo->id) }}" id="photo{{ $photo->id }}">
+                                                    <button type="button" onclick="deletePhoto({{ $photo->id }})"  class="w-100 btn btn-outline-danger btn-sm my-2 me-2 ">
+                                                        <i class="bx bx-trash"></i>
+                                                    </button>
+                                                </form>
                                                 <img width="100%" src="{{ $photo->name }}" alt="">
                                             </div>
                                         </div>
@@ -338,25 +342,19 @@
             search: true
         });
 
-        async function deleteBox(id)
+        function deleteBox(id)
         {
-            let data = await axios.get('/product/specification/'+id);
-            console.log(data);
-            if(data.data.data){
-                document.getElementById('addBox'+id).remove();
-            }
+            console.log(document.getElementById('removeSpec'+id))
+          document.getElementById('removeSpec'+id).submit();
         }
 
         function rawDelete(id){
             document.getElementById('addBox'+id).remove();
         }
-        async function deletePhoto(id)
-        {
-            let data = await axios.get('/product/photo/delete/'+id);
 
-            if(data.data.data){
-                document.getElementById('photo'+id).remove();
-            }
+        function deletePhoto(id)
+        {
+          document.getElementById('photo'+id).submit();
         }
         // document.querySelector("#ckeditor-classic") &&
         // ClassicEditor.create(document.querySelector("#ckeditor-classic"))

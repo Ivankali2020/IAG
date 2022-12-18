@@ -23,7 +23,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->name(),
             'category_id' => Category::all()->random()->id,
             'subCategory_id' => SubCategory::all()->random()->id,
-            'add_on' => SubCategory::all()->random()->name,
+            'add_on' => SubCategory::all()->random()->id,
             'highlight' => $this->faker->paragraph(),
             'ordering' => $this->faker->sentence(),
             'ingredient' => $this->faker->paragraph(),
@@ -35,6 +35,7 @@ class ProductFactory extends Factory
             'unit' => $units[random_int(0,3)],
             'tags' => $tags[random_int(0,20)],
             'description' => $this->faker->paragraph(),
+            'is_publish' => (string)random_int(0,1),
         ];
     }
 }
