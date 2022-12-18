@@ -222,6 +222,7 @@ class ProductController extends Controller
         $product->is_publish = $product->is_publish == '1' ? '0' : '1';
         $product->update();
 
+//        return redirect()->route('home')->with('message',['icon' => 'success', 'text' => "Successfully Publish!"]);
         return response()->json(['data'=>true,'status' => $product->is_publish]);
     }
 

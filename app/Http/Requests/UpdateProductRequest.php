@@ -30,7 +30,7 @@ class UpdateProductRequest extends FormRequest
             'code' => 'required',
             'name' => 'required',
             'price' => 'required|integer',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required|',
             'subCategory_id' => 'required',
             'description' => 'required',
             'add_on' => 'required',

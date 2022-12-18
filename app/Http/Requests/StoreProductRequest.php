@@ -27,7 +27,7 @@ class StoreProductRequest extends FormRequest
             'code' => 'required',
             'name' => 'required',
             'price' => 'required|integer',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required',
             'subCategory_id' => 'required',
             'description' => 'required',
             'images'         => 'required|array|min:1|max:10',
