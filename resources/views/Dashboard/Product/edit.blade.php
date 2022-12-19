@@ -364,7 +364,7 @@
             if(document.getElementById('photo'+id) == null){
                 let box = document.getElementById('next-box')
                 let form = document.createElement('form');
-                form.setAttribute('action','product_photo/'+id);
+                form.setAttribute('action','{{ request()->segment(0) }}/product_photo/'+id);
                 form.setAttribute('method','get');
                 form.setAttribute('id','photo'+id);
 
