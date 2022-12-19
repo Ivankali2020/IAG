@@ -233,6 +233,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <h4 class="my-3 ">Product Specification</h4>
+                                    <div id="other"></div>
                                     @forelse($product->specs as $spec)
                                         <div >
                                             <div class="mb-3 col-12 " >
@@ -359,7 +360,22 @@
 
         function deletePhoto(id)
         {
-          document.getElementById('photo'+id).submit();
+            console.log(id);
+            if(document.getElementById('photo'+id) == null){
+                let box = document.getElementById('next-box')
+                let form = document.createElement('form');
+                form.setAttribute('action','/product_photo/'+id);
+                form.setAttribute('method','get');
+                form.setAttribute('id','photo'+id);
+
+                box.append(form);
+
+
+                document.getElementById('photo'+id).submit();
+
+            }else{
+                document.getElementById('photo'+id).submit();
+            }
         }
         // document.querySelector("#ckeditor-classic") &&
         // ClassicEditor.create(document.querySelector("#ckeditor-classic"))
