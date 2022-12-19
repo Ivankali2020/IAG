@@ -26,7 +26,7 @@ class ProductController extends Controller
                 ->orWhereHas('Category',function ($c) use ($request){
                     return $c->where('name','LIKE',"%$request->keyword%");
                 })
-                ->orWhereHas('Brand',function ($b) use ($request){
+                ->orWhereHas('subCategory',function ($b) use ($request){
                     return $b->where('name','LIKE',"%$request->keyword%");
                 });
         })->when(isset($request->status),function ($e){
@@ -80,17 +80,18 @@ class ProductController extends Controller
                 }
             }
 
-            if(count($request->stitle) > 1){
-                $data = [];
-                foreach ($request->stitle as $key=>$item) {
-                    $data[] = [
-                       'product_id' => $product->id,
-                      'title' =>  $item,
-                      'description' => $request->sdescription[$key] ?? '',
+            $specifications = [];
+            foreach ($request->stitle as $key=>$item) {
+                if ($item != null){
+                    $specifications[] = [
+                        'product_id' => $product->id,
+                        'title' =>  $item,
+                        'description' => $request->sdescription[$key] ?? '',
                     ];
                 }
-
-                ProductSpecification::insert($data);
+            }
+            if(count($specifications) > 0){
+                ProductSpecification::insert($specifications);
             }
             DB::commit();
             return redirect()->route('home')->with('message',['icon' => 'success', 'text' => $product->name . 'is successfully created!']);

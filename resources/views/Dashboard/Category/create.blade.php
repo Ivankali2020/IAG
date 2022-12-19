@@ -127,7 +127,7 @@
         function confirm(value,id){
             Swal.fire({
                 title: "Are you sure?",
-                text: ` ${value} category will be delete!`,
+                text: ` ${value} category will be delete and!`,
                 icon: "warning",
                 showCancelButton: !0,
                 confirmButtonText: "Yes, delete it!",

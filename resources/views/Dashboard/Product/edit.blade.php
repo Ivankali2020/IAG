@@ -142,47 +142,12 @@
                                     </div>
                                 </div>
 
-
-                                <div class="row">
-                                    <h4 class="my-3 ">Product Specification</h4>
-                                    @forelse($product->specs as $spec)
-                                        <div >
-                                            <div class="mb-3 col-12 " >
-                                                <div class=" d-flex justify-content-between align-items-center">
-                                                    <label for="basiInput" class="form-label">Title</label>
-                                                    <form action="{{ route('product.specification',$spec->id) }}" id="removeSpec{{ $spec->id }}" method="get">
-                                                        <button class="btn btn-danger btn-sm mb-2 " type="button" onclick="deleteBox({{ $spec->id }})"><i class="bx bx-trash"></i></button>
-                                                    </form>
-
-                                                </div>
-                                                <input type="text" class="form-control" name="stitle[]" value="{{ old('stitle[0]',$spec->title) }}">
-                                            </div>
-
-                                            <div class="mb-3 col-12 ">
-                                                <label for="basiInput" class="form-label">Description</label>
-                                                <textarea name="sdescription[]" class="form-control " id="" cols="10" rows="2" placeholder="product specification description">{{ old('s_description[o]',$spec->description) }} </textarea>
-                                            </div>
-                                        </div>
-                                        @empty
-
-                                        <div class="mb-3 col-12 ">
-                                            <label for="basiInput" class="form-label">Title : 1</label>
-                                            <input type="text" class="form-control" name="stitle[]">
-                                        </div>
-
-                                        <div class="mb-3 col-12 ">
-                                            <label for="basiInput" class="form-label">Description : 1</label>
-                                            <textarea name="sdescription[]" class="form-control " id="" cols="10" rows="2" placeholder="product specification description"> </textarea>
-                                        </div>
-
-                                    @endforelse
-
-
-                                    <div class="next-box" id="next-box"></div>
-                                </div>
-
-                                <div class="text-end mb-3 mb-md-0 ">
-                                    <button type="button" onclick="addSpecs()" class="btn btn-primary "> + Add Specification</button>
+                                <div class="mb-3 ">
+                                    <label for="basiInput" class="form-label">Description</label>
+                                    <textarea name="description" class="form-control" id="" cols="30" rows="10">{{ old('description',$product->description) }}</textarea>
+                                    @error('description')
+                                    <span class="text-danger small">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                             </div>
@@ -231,13 +196,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-3 ">
-                                    <label for="basiInput" class="form-label">Description</label>
-                                    <textarea name="description" class="form-control" id="" cols="30" rows="10">{{ old('description',$product->description) }}</textarea>
-                                    @error('description')
-                                    <span class="text-danger small">{{ $message }}</span>
-                                    @enderror
-                                </div>
+
                                 <div class="form-group" >
                                     <label for="images"> Product Photos
                                         @error('images')
@@ -264,8 +223,54 @@
                                         @endforelse
                                 </div>
 
+
+
                                 <div class="text-end mt-4 ">
                                     <button class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <h4 class="my-3 ">Product Specification</h4>
+                                    @forelse($product->specs as $spec)
+                                        <div >
+                                            <div class="mb-3 col-12 " >
+                                                <div class=" d-flex justify-content-between align-items-center">
+                                                    <label for="basiInput" class="form-label">Title</label>
+                                                    <form action="{{ route('product.specification',$spec->id) }}" id="removeIvan{{ $spec->id }}" method="get">
+                                                    </form>
+                                                    <button class="btn btn-danger btn-sm mb-2 " type="button" onclick="deleteBox({{ $spec->id }})"><i class="bx bx-trash"></i></button>
+
+                                                </div>
+                                                <input type="text" class="form-control" name="stitle[]" value="{{ old('stitle[0]',$spec->title) }}">
+                                            </div>
+
+                                            <div class="mb-3 col-12 ">
+                                                <label for="basiInput" class="form-label">Description</label>
+                                                <textarea name="sdescription[]" class="form-control " id="" cols="10" rows="2" placeholder="product specification description">{{ old('s_description[o]',$spec->description) }} </textarea>
+                                            </div>
+                                        </div>
+                                    @empty
+
+                                        <div class="mb-3 col-12 ">
+                                            <label for="basiInput" class="form-label">Title : 1</label>
+                                            <input type="text" class="form-control" name="stitle[]">
+                                        </div>
+
+                                        <div class="mb-3 col-12 ">
+                                            <label for="basiInput" class="form-label">Description : 1</label>
+                                            <textarea name="sdescription[]" class="form-control " id="" cols="10" rows="2" placeholder="product specification description"> </textarea>
+                                        </div>
+
+                                    @endforelse
+
+
+                                    <div class="next-box" id="next-box"></div>
+                                </div>
+
+                                <div class="text-end mb-3 mb-md-0 ">
+                                    <button type="button" onclick="addSpecs()" class="btn btn-primary "> + Add Specification</button>
                                 </div>
                             </div>
                         </div>
@@ -344,8 +349,8 @@
 
         function deleteBox(id)
         {
-            console.log(document.getElementById('removeSpec'+id))
-          document.getElementById('removeSpec'+id).submit();
+            console.log(id)
+            document.getElementById('removeIvan'+id).submit();
         }
 
         function rawDelete(id){
